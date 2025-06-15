@@ -1,0 +1,27 @@
+{
+    "WaveNet": {
+        "num_stacks": 2, 
+        "_num_stacks_desc": "조정한 부분 => WaveNet 내 residual block 반복 횟수 (stack 개수)",
+        "dilations": 10,
+        "_dilations_desc": "조정한 부분 => dilated conv depth",
+        "Resblock": {
+            "conv1d": {
+                "res": 32,
+                "skip": 32,
+                "kernel": [3,1]
+            }},
+        "conv": {
+            "input": [1, 32, 128, 32],
+            "out": [32, 128, 32, 16],
+            "kernel": [3,3,3,1]
+            }
+    },
+    "VNN2": {
+        "Q2" : 4,
+        "conv1d": {
+            "input": [16, 16],
+            "out": [1, 1],
+            "kernel": [256, 256]
+            }
+    }
+}

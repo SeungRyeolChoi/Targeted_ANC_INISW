@@ -1,0 +1,24 @@
+[DDP]
+world_size = 1
+
+[optimizer]
+lr = 0.0001
+
+[listener]
+listener_sr = 16000
+
+[train_dataloader]
+batch_size = 8
+num_workers = 4
+drop_last = true
+pin_memory = true
+
+[trainer]
+epochs = 30
+save_checkpoint_interval = 1
+clip_grad_norm_value = 3.0
+exp_path = "/content/drive/MyDrive/inference_pipeline/WaveNet-VNNs/checkpoints/"
+resume = false
+resume_datetime = ""
+resume_step = 0
+eta = 0.1

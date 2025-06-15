@@ -1,0 +1,25 @@
+[DDP]
+world_size = 1             # 사용 가능한 GPU 개수
+
+[optimizer]
+lr = 1e-4                  # 학습률
+
+[listener]
+listener_sr = 16000        # 입력 오디오 샘플링 레이트(Hz)
+
+[train_dataloader]
+batch_size = 8             # 학습시 배치 크기 (4에서 8로 조정)
+num_workers = 4            # 데이터 로드시 사용될 CPU 프로세스 수(0->4로 조정하여 병목을 줄이고자 하였음)
+drop_last = true           # 마지막 미만 배치 버릴지 여부
+pin_memory = true          # CUDA 고정 메모리 사용 여부
+
+
+[trainer]
+epochs = 30                          # 에폭 수
+save_checkpoint_interval = 1         # 몇 에폭마다 체크포인트 저장할지
+clip_grad_norm_value = 3.0           # gradient clipping 값
+exp_path = '/content/drive/MyDrive/inference_pipeline/WaveNet-VNNs/checkpoints/' # 체크포인트 저장 경로
+resume = false                        # 이전 학습 이어서 시작 여부
+resume_datetime = ''                 # 이어서 시작할 체크포인트 날짜/시간
+resume_step = 0                      # 이어서 시작할 스텝 인덱스
+eta = 0.1                            # ANC에서 사용되는 eta(0.1=비선형)
