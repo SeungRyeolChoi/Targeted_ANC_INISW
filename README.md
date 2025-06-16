@@ -10,8 +10,8 @@
 
 
 
-# Inference_Pipeline
-## **분리, 분류, 저감 모델의 Training과 Inference Command line usage**
+## Inference_Pipeline
+**분리, 분류, 저감 모델의 Training과 Inference Command line usage**
 
 ### C-SuDoRM-RF++ Training Command
 ```bash
@@ -45,6 +45,8 @@
 ```
 
 
+
+
 ### C-SuDoRM-RF++ Inference Command
 ```bash
 !python /content/drive/MyDrive/inference_pipeline/C_SudoRM_RF/c_sudormrf_inference.py \
@@ -57,7 +59,7 @@
 
 ### Audio Segment Classifier(ASC) Training Command
 ```bash
-!python /content/drive/MyDrive/inference_pipeline/ASC/ASC.py \
+!python /content/drive/MyDrive/inference_pipeline/ASC/ASC_train.py \
     --train_s1_dir /content/drive/MyDrive/final_data/train/spk1 \
     --train_s2_dir /content/drive/MyDrive/final_data/train/spk2 \
     --val_s1_dir     /content/drive/MyDrive/final_data/val/spk1 \
@@ -72,7 +74,16 @@
     --epochs 15
 ```
 
+### Audio Segment Classifier(ASC) Inference Command
+```bash
+!python /content/drive/MyDrive/inference_pipeline/ASC/ASC_inference.py \
+  --test_s1_dir <your_broadcast_dir> \
+  --test_s2_dir <your_noise_dir> \
+  --model_path /content/drive/MyDrive/inference_pipeline/ASC/asc.pth
+```
+
 ---
+
 
 ### WaveNet-VNNs Training Command
 ```bash
@@ -80,6 +91,13 @@
   --config /content/drive/MyDrive/inference_pipeline/WaveNet_VNNs/cfg_train_opt_210.toml \
   --device 0
 ```
+
+**Benchmark Dataset**
+
+Demand: https://www.kaggle.com/datasets/chrisfilo/demand
+
+ms_snsd: https://www.kaggle.com/datasets/jiangwq666/ms-snsd
+
 
 ### WaveNet-VNNs Infernce Command
 ```bash
@@ -93,7 +111,7 @@
 
 ---
 
-  ## EndtoEnd Inference Command
+### EndtoEnd Inference Command
 ```bash
 !python /content/drive/MyDrive/inference_pipeline/end2end_inference.py \
   --sep_ckpt      /content/drive/MyDrive/inference_pipeline/C_SudoRM_RF/causal_best.pt \
@@ -107,5 +125,13 @@
   --anti_out     <your_antinoise_dir> \
   --final_out   <your_final_dir>
 ```
+**실행 환경은 Google Colab을 기준으로 작성되었습니다.**  
+**모든 out 및 output 인자들은 빈 디렉토리로 미리 준비해두어야 합니다.**
 
-**모든 out 및 output 인자들은 빈 디렉토리로 미리 준비해두어야합니다.**
+## References
+
+C-SudoRMRF++:
+https://github.com/etzinis/sudo_rm_rf
+
+WaveNet-VNNs:
+https://github.com/Lu-Baihh/WaveNet-VNNs-for-ANC
