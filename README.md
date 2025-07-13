@@ -1,4 +1,5 @@
 # TargetedANC
+능동형 노이즈 제어(ANC)는 원 소음에 대한 반대 위상을 생성하여 소음을 상쇄하지만 (1) 소음의 비선형 특성 반영 부족, (2) 신호 처리 과정에서의 시간 지연(time latency), (3) 복합 소리에서의 필요한 음원까지 저감한다는 한계가 존재한다. 이에 본 연구에서는 분리-저감을 End-to-End로 결합하여 Targeted ANC 모델을 제안한다. 분리의 경우 C-SuDoRM-RF++ 기반 인과적 분리 모델로 두 음원(안내 방송/소음 등)으로 분리한 뒤, Audio Segment Classifier(ASC)가 각 음원을 확률적으로 식별한다. 소음으로 식별된 신호만 WaveNet-Volterra Neural Network 기반 저감 모델로 전달하여 비선형 특성을 고려한 anti-noise를 생성한다. 본 연구 결과로  분리-저감 End-to-End 모델의 지연을 24.64ms로 도출하였다. 또한 평균 dBA -35.12 dB, NMSE -43.72dB를 기록하여 기존 필터 기반 ANC 연구(FxLMS, SFANC) 대비 성능 손실 없이 지연 시간을 도출하였다. 본 연구는 중·고주파의 소음과 비선형 특성을 다루는 WaveNet-VNN 저감과 복합 소리에 대한 소음 분리를 통해 실시간으로 선택적 저감을 수행하는 측면에서 의의가 있다. 이는 교통·모빌리티·웨어러블 디바이스 등 저지연 소음 제어가 요구되는 다양한 현장에 적용될 수 있다.
 
 
 
@@ -7,7 +8,32 @@
 
 ---
 
+## Training Data
+Training Data Download Link : https://drive.google.com/file/d/1odQm9jrT03vR3z78yDJt0k169AYluz3M/view?usp=sharing
+<div align="center">
+<img src="https://github.com/user-attachments/assets/a02c34e8-2300-44c7-8ad5-4a4dd7f9cf3f" alt="Dataset Analysis Tables" width="600">
+</div>
 
+총 36시간의 학습 데이터셋
+
+서울 교통 공사의 1~8호선 안내방송음과 AI HUB의 도시 소음 데이터를 사용
+
+분리(C-SuDoRM-RF++), 분류(ASC)에 사용
+
+---
+
+### Airplane Data
+Airplane Data Download Link : https://drive.google.com/file/d/1sAq702S0YB-UkHnM5RuQGnYXmg5fniwf/view?usp=sharing
+
+<div align="center">
+<img src="https://github.com/user-attachments/assets/19263f40-3618-4bf6-b5b0-6e17ee62fd17" alt="airplane_data_statistic" width="600">
+</div>
+
+총 18시간의 항공 데이터셋
+
+Simplaza의 74개의 항공사 기내 안전 안내방송 음원과 AI HUB의 도시 소음 데이터 중 비행기 소음 데이터를 사용
+
+분리(C-SuDoRM-RF++), 분류(ASC)에 사용
 
 
 ## Inference_Pipeline
